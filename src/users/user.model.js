@@ -3,13 +3,13 @@ import { Schema, model } from "mongoose";
 const UserSchema = Schema({
     name: {
         type: String,
-        required: [true, "Name is required"],
-        maxLength: [25, "Cant be overcome 25 characters"]
+        required: [true, "El nombre es obligatorio"],
+        maxlength: [25, "El nombre tiene más de 25 caracteres"]
     },
     surname: {
         type: String,
-        required: [true, "Surname is required"],
-        maxLength: [25, "Cant be overcome 25 characters"]
+        required: [true, "El apellido es obligatorio"],
+        maxlength: [25, "El apellido tiene más de 25 caracteres"]
     },
     username: {
         type: String,
@@ -17,19 +17,19 @@ const UserSchema = Schema({
     },
     email: {
         type: String,
-        required: [true, "Email is required"],
+        required: [true, "El email es obligatorio"],
         unique: true
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
-        minLength: 8,
+        required: [true, "La contraseña es obligatoria"],
+        minLength: [8, "La contraseña solo puede tener minimo 8 caracteres"]
     },
     phone: {
         type: String,
-        maxlength: 8,
-        minlength: 8,
-        required: true
+        maxlength: [8, "El número de teléfono solo puede tener máximo 8 caracteres"],
+        minlength: [8, "El número de teléfono solo puede tener minimo 8 caracteres"],
+        required: [true, "El número de teléfono es obligatorio"]
     },
     role: {
         type: String,

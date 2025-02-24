@@ -14,7 +14,7 @@ export const saveCategorie = async (req, res) => {
         if (req.user.role !== "ADMIN") {
             return res.status(400).json({
                 success: false,
-                msg: 'Error, permisos denegado para guardar categorias'
+                msg: 'No tienes permisos para guardar categorias'
             });
         }
 
@@ -27,7 +27,7 @@ export const saveCategorie = async (req, res) => {
         console.log(error);
         res.status(500).json({
             success: false,
-            msg: 'Error, no se ha podido guardar la categoría',
+            msg: 'Error, no se ha podido guardar la categoria',
             error
         });
     }
@@ -151,7 +151,7 @@ export const updateCategorie = async (req, res = response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            msg: 'Error, no se ha podido actualizar la categoría',
+            msg: 'Error, no se ha podido actualizar la categoria',
             error
         });
     }
@@ -251,8 +251,6 @@ export const defaultCategorie = async () => {
 
 
     } catch (error) {
-        console.error("Error, no se ha podido crear la categoria", 
-        error
-        );
+        console.error("Error, no se ha podido crear la categoria", error);
     }
 }

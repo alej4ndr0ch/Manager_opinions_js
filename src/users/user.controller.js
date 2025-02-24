@@ -38,7 +38,7 @@ export const login = async (req, res) => {
         const token = await generateJWT(user.id);
 
         res.status(200).json({
-            msg: 'Inicio de Sesión exitoso!!',
+            msg: 'Inicio de secion',
             userDetails: {
                 username: user.username,
                 token: token
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
         console.error(e);
 
         return res.status(500).json({
-            msg: 'Server error',
+            msg: 'User registration failded',
             error: e.message
         })
     }
@@ -146,7 +146,6 @@ export const getUserById = async (req, res) => {
         })
 
     } catch (error) {
-        
         res.status(500).json({
             success: false,
             msg: 'Error, el usuario no ha sido encontrado',
@@ -209,6 +208,7 @@ export const updateUser = async (req, res = response) => {
             data.password = await hash(password);
         }
 
+
         const updateUser = await User.findByIdAndUpdate(id, data, { new: true });
 
         res.status(200).json({
@@ -227,25 +227,30 @@ export const updateUser = async (req, res = response) => {
     }
 }
 
-export const Admin = async () => {
+export const createAddAdmin = async () => {
     try {
 
-        await User.findOneAndDelete({ username: "Administrador" })
+        const verifyUser = await User.findOne({ username: "Administrador".toLowerCase() })
 
-        const encryptedPassword = await hash("Admin100");
-        const adminUser = new User({
-            name: "Alejandro",
-            surname: "Cuxún",
-            username: "Administrador".toLowerCase(),
-            email: "alejandrocuxun@gmail.com",
-            phone: "42217005",
-            password: encryptedPassword,
-            role: "ADMIN"
-        });
+        if (!verifyUser) {
+            const encryptedPassword = await hash("Admin100");
+            const adminUser = new User({
+                name: "Alejandro",
+                surname: "Cuxún",
+                username: "Administrador".toLowerCase(),
+                email: "alejandrocuxun@gmail.com",
+                phone: "42217005",
+                password: encryptedPassword,
+                role: "ADMIN"
+            });
+    
+            await adminUser.save();
+    
+            console.log("Administrador creado exitosamente");
+        } else {
+            console.log("Administrado se ha creado exitosamente");
+        }
 
-        await adminUser.save();
-
-        console.log("Administrado se ha creado exitosamente");
     
     } catch (error) {
         console.error("Error, no se ha podido crear el administrado: ", 
