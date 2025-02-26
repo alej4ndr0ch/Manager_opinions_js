@@ -11,6 +11,7 @@ import { defaultCategorie } from '../src/categories/categorie.controller.js';
 import userRoutes from '../src/users/user.routes.js';
 import categorieRoutes from '../src/categories/categorie.routes.js';
 import publicationRoutes from '../src/publications/publication.routes.js';
+import commentRoutes from '../src/comments/comment.routes.js';;
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -25,12 +26,13 @@ const routes = (app) => {
     app.use('/opinionManager/v1/users', userRoutes);
     app.use('/opinionManager/v1/categories', categorieRoutes);
     app.use('/opinionManager/v1/publications', publicationRoutes);
+    app.use('/opinionManager/v1/comments', commentRoutes);
 };
 
 const conectarDB = async () => {
     try {
         await dbConnection();
-        console.log('¡¡Conexión a la base de datos exitosa!!');
+        console.log('Conexión a la base de datos ha sido exitosa');
         await createAddAdmin();
         await defaultCategorie();
     } catch (error) {
