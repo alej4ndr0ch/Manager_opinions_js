@@ -31,7 +31,7 @@ export const login = async (req, res) => {
 
         if (!validPassword) {
             return res.status(404).json({
-                msg: 'Contraseña incorrecta'
+                msg: 'la contraseña es incorrecta'
             })
         }
 
@@ -113,13 +113,13 @@ export const getUsers = async (req = request, res = response) => {
 
         res.status(500).json({
             success: false,
-            msg: 'Error al obtener los usuarios',
+            msg: 'Error, al obtener los usuarios',
             error
         })       
     }
 }
 
-export const getUserById = async (req, res) => {
+export const getUsersById = async (req, res) => {
     try {
         
         const { id } = req.params;
@@ -154,7 +154,7 @@ export const getUserById = async (req, res) => {
     }
 }
 
-export const updateUser = async (req, res = response) => {
+export const updateUsers = async (req, res = response) => {
     try {
         
         const { id } = req.params;
